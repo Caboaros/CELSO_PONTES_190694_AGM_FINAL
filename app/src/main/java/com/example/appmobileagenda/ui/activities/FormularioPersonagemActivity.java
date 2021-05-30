@@ -54,10 +54,10 @@ public class FormularioPersonagemActivity extends AppCompatActivity {
                     startActivity(new Intent(FormularioPersonagemActivity.this, ListaPersonagemActivity.class));
 
 //                toast que exibe msg de aviso na tela com os dados que foram salvos
-//                Toast.makeText(FormularioPersonagemActivity.this,
-//                        personagemSalvo.getNome() + " - " +
-//                                personagemSalvo.getAltura() + " - " +
-//                                personagemSalvo.getNascimento(), Toast.LENGTH_SHORT).show();
+                /*Toast.makeText(FormularioPersonagemActivity.this,
+                        personagemSalvo.getNome() + " - " +
+                                personagemSalvo.getAltura() + " - " +
+                                personagemSalvo.getNascimento(), Toast.LENGTH_SHORT).show();*/
 
 //                cria um novo Personagem com os dados inseridos
                     new Personagem(nome, altura, nascimento);
@@ -68,4 +68,6 @@ public class FormularioPersonagemActivity extends AppCompatActivity {
         });
 
     }
+
+
 }

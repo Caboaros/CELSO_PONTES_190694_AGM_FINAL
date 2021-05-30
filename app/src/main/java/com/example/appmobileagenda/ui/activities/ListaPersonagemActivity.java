@@ -27,8 +27,6 @@ public class ListaPersonagemActivity extends AppCompatActivity {
         setContentView(R.layout.activity_lista_personagem);
         setTitle("Lista de Personagens");
 
-        PersonagemDAO personagemDAO = new PersonagemDAO();
-
 //        referencia o fab na activity lista de personagem
         FloatingActionButton fab_add = findViewById(R.id.fab_addPerson);
 //        configura a ação do botão para abrir o formulário
@@ -40,20 +38,27 @@ public class ListaPersonagemActivity extends AppCompatActivity {
         });
 
 //        lista de personagens
-//        List<String> personagem = new ArrayList<>(Arrays.asList("Alex", "Ken", "Ryu", "Guile"));
+        /*List<String> personagem = new ArrayList<>(Arrays.asList("Alex", "Ken", "Ryu", "Guile"));
 
+        TextView primeiroPersonagem = findViewById(R.id.textView1);
+        TextView segundoPersonagem = findViewById(R.id.textView2);
+        TextView terceiroPersonagem = findViewById(R.id.textView3);
+
+        primeiroPersonagem.setText(personagem.get(0));
+        segundoPersonagem.setText(personagem.get(1));
+        terceiroPersonagem.setText(personagem.get(2));*/
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        PersonagemDAO personagemDAO = new PersonagemDAO();
 //        referencia este listview com o activity_main_lista_personagem
         ListView listaDePersonagens = findViewById(R.id.activity_main_lista_personagem);
 
 //        relaciona um array adapter com a lista personagem
         listaDePersonagens.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, personagemDAO.todos()));
 
-//        TextView primeiroPersonagem = findViewById(R.id.textView1);
-//        TextView segundoPersonagem = findViewById(R.id.textView2);
-//        TextView terceiroPersonagem = findViewById(R.id.textView3);
-//
-//        primeiroPersonagem.setText(personagem.get(0));
-//        segundoPersonagem.setText(personagem.get(1));
-//        terceiroPersonagem.setText(personagem.get(2));
     }
 }
