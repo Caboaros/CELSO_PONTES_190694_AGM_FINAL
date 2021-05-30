@@ -25,7 +25,7 @@ public class ListaPersonagemActivity extends AppCompatActivity {
         //referencia este listview com o activity_main_lista_personagem
         ListView listaDePersonagens = findViewById(R.id.activity_main_lista_personagem);
 
-        //relaciona um adapter com a lista personagem
+        //relaciona um array adapter com a lista personagem
         listaDePersonagens.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, personagem));
 
 //        TextView primeiroPersonagem = findViewById(R.id.textView1);

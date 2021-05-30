@@ -1,9 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".ui.activities.FormularioPersonagemActivity">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <EditText
+        android:id="@+id/edit_nome"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:ems="10"
+        android:hint="Nome ex.: João"
+        android:inputType="textShortMessage|textPersonName"
+        android:singleLine="true" />
+
+    <EditText
+        android:id="@+id/edit_altura"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:ems="10"
+        android:hint="Altura ex.: 1.70"
+        android:inputType="numberDecimal"
+        android:selectAllOnFocus="true"
+        android:singleLine="true" />
+
+    <EditText
+        android:id="@+id/edit_nasc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:ems="10"
+        android:hint="Nascimento ex.: 01/01/01"
+        android:inputType="date"
+        android:selectAllOnFocus="true"
+        android:singleLine="true" />
+
+    <Button
+        android:id="@+id/bt_salvar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="Salvar" />
+</LinearLayout>
