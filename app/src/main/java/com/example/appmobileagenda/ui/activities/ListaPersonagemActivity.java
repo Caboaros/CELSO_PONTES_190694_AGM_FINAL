@@ -5,7 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.service.controls.actions.FloatAction;
+import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
@@ -58,7 +60,18 @@ public class ListaPersonagemActivity extends AppCompatActivity {
         ListView listaDePersonagens = findViewById(R.id.activity_main_lista_personagem);
 
 //        relaciona um array adapter com a lista personagem
-        listaDePersonagens.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, personagemDAO.todos()));
+        List<Personagem> personagens = personagemDAO.todos();
+        listaDePersonagens.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, personagens));
 
+        listaDePersonagens.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Personagem personagemEscolhido = personagens.get(position);
+                Log.i("Personagem", "" + personagemEscolhido);
+
+                Intent abreFormulario = new Intent(ListaPersonagemActivity.this, FormularioPersonagemActivity.class);
+                startActivity(abreFormulario);
+            }
+        });
     }
 }
