@@ -1,5 +1,7 @@
 package com.example.appmobileagenda.model;
 
+import androidx.annotation.NonNull;
+
 public class Personagem {
 
     private final String nome;
@@ -7,11 +9,18 @@ public class Personagem {
     private final String nascimento;
 
     //método construtor de Personagem
-    public Personagem(String nome, String altura, String nascimento) {
+    public Personagem(String nome, String alt, String nasc) {
 
         this.nome = nome;
-        this.altura = altura;
-        this.nascimento = nascimento;
+        this.altura = alt;
+        this.nascimento = nasc;
+    }
+
+//  para exibição correta na lista
+    @NonNull
+    @Override
+    public String toString() {
+        return nome;
     }
 
     //getters
