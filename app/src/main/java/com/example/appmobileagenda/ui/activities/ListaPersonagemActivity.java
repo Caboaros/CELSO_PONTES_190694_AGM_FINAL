@@ -63,12 +63,15 @@ public class ListaPersonagemActivity extends AppCompatActivity {
         List<Personagem> personagens = personagemDAO.todos();
         listaDePersonagens.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, personagens));
 
+//        torna os itens da lista clicáveis
         listaDePersonagens.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//                seleciona o personagem pegando pela posição na lista
                 Personagem personagemEscolhido = personagens.get(position);
                 Log.i("Personagem", "" + personagemEscolhido);
 
+//                cria o intent e abre o formulário
                 Intent abreFormulario = new Intent(ListaPersonagemActivity.this, FormularioPersonagemActivity.class);
                 startActivity(abreFormulario);
             }
