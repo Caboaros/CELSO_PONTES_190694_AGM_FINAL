@@ -1,13 +1,13 @@
 package com.example.appmobileagenda.ui.activities;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.appmobileagenda.R;
 import com.example.appmobileagenda.dao.PersonagemDAO;
@@ -53,9 +53,6 @@ public class FormularioPersonagemActivity extends AppCompatActivity {
 
                     dao.salva(personagemSalvo);
                     finish();
-//                    startActivity(new Intent(FormularioPersonagemActivity.this, ListaPersonagemActivity.class));
-//                cria um novo Personagem com os dados inseridos
-//                    new Personagem(nome, altura, nascimento);
 
                 personagemSalvo.setNome(nome);
                 personagemSalvo.setAltura(altura);
@@ -63,17 +60,15 @@ public class FormularioPersonagemActivity extends AppCompatActivity {
                 dao.editar(personagemSalvo);
 
                 Toast.makeText(FormularioPersonagemActivity.this, "Salvo.", Toast.LENGTH_SHORT).show();
-
-                Intent dados = getIntent();
-                Personagem personagem = (Personagem) dados.getSerializableExtra("personagem");
-                edit_nome.setText(personagem.getNome());
-                edit_altura.setText(personagem.getAltura());
-                edit_nasc.setText(personagem.getNascimento());
-
                 }
             }
         });
 
+        Intent dados = getIntent();
+        Personagem personagem = (Personagem) dados.getSerializableExtra("personagem");
+        edit_nome.setText(personagem.getNome());
+        edit_altura.setText(personagem.getAltura());
+        edit_nasc.setText(personagem.getNascimento());
     }
 
 
