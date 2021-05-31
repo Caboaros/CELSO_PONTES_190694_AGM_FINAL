@@ -14,10 +14,9 @@ public class PersonagemDAO {
 //        adiciona o novo personagem no dao
         personagemSalvo.setId(contadorId);
         personagens.add(personagemSalvo);
-//        aumenta o contador de Id
         autalizaId();
     }
-
+//        aumenta o contador de Id
     private void autalizaId() {
         contadorId++;
     }

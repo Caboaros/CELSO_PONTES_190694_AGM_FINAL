@@ -1,5 +1,7 @@
 package com.example.appmobileagenda.ui.activities;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.ContextMenu;
@@ -42,25 +44,50 @@ public class ListaPersonagemActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        atualizaPersonagem();
+    }
+
+//    limpa e adiciona personagens novamente na lista
+    private void atualizaPersonagem() {
         adapter.clear();
         adapter.addAll(dao.todos());
     }
+
 //    cria context menu ao selecionar
     @Override
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
         super.onCreateContextMenu(menu, v, menuInfo);
-        menu.add("Remover");
+//        menu.add("Remover");
+        getMenuInflater().inflate(R.menu.activity_lista_personagens_menu, menu);
     }
 
     @Override
     public boolean onContextItemSelected(@NonNull MenuItem item) {
-        AdapterView.AdapterContextMenuInfo menuInfo = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
-        Personagem personagemEscolhido = adapter.getItem(menuInfo.position);
-        adapter.remove(personagemEscolhido);
+        configuraMenu(item);
         return super.onContextItemSelected(item);
     }
 
-    //    configura a ação do botão para abrir o formulário
+//    chama menu para remover personagem
+    private void configuraMenu(@NonNull MenuItem item) {
+        int itemId = item.getItemId();
+        if(itemId == R.id.activity_lista_personagem_menu_remover) {
+            new AlertDialog.Builder(this)
+                    .setTitle("Removendo Personagem")
+                    .setMessage("Tem certeza que deseja remover?")
+                    .setPositiveButton("Sim", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            AdapterView.AdapterContextMenuInfo menuInfo = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+                            Personagem personagemEscolhido = adapter.getItem(menuInfo.position);
+                            adapter.remove(personagemEscolhido);
+                        }
+                    })
+                    .setNegativeButton("Não", null)
+                    .show();
+        }
+    }
+
+//    configura a ação do botão para abrir o formulário
     private void configuraFabNovoPersonagem() {
         fab_add.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -85,7 +112,7 @@ public class ListaPersonagemActivity extends AppCompatActivity {
         listaDePersonagens.setAdapter(adapter);
     }
 
-    //        torna os itens da lista clicáveis para ser editados e
+//        torna os itens da lista clicáveis para ser editados e
 //        seleciona o personagem pegando pela posição na lista
     private void configuraItensEdit(ListView listaDePersonagens) {
         listaDePersonagens.setOnItemClickListener(new AdapterView.OnItemClickListener() {
