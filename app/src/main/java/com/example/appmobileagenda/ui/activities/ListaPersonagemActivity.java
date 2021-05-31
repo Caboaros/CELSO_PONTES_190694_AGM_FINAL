@@ -74,14 +74,14 @@ public class ListaPersonagemActivity extends AppCompatActivity {
 
 //    relaciona um array adapter com a lista personagem
     private void configuraLista() {
-        final List<Personagem> personagens = dao.todos();
-        listaDePersonagens(listaDePersonagens, personagens);
+        //final List<Personagem> personagens = dao.todos();
+        listaDePersonagens(listaDePersonagens);
         configuraItensEdit(listaDePersonagens);
         registerForContextMenu(listaDePersonagens);
     }
 
-    private void listaDePersonagens(ListView listaDePersonagens, List<Personagem> personagens) {
-        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, personagens);
+    private void listaDePersonagens(ListView listaDePersonagens) {
+        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1);
         listaDePersonagens.setAdapter(adapter);
     }
 
