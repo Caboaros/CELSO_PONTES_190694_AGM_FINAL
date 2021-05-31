@@ -21,6 +21,11 @@ public class Personagem implements Serializable {
 //    construtor vazio
     public Personagem(){}
 
+//  para exibição correta na lista
+    @NonNull
+    @Override
+    public String toString() { return nome; }
+
 //    setters
     public void setId(int id) { this.id = id; }
     public void setNome(String nome) { this.nome = nome; }
@@ -33,7 +38,7 @@ public class Personagem implements Serializable {
     public String getAltura() { return altura; }
     public String getNascimento() { return nascimento; }
 
-    //  para exibição correta na lista
-    @NonNull @Override public String toString() { return nome; }
+//    verifica se id é válido
+    public boolean IdValido() { return id > 0;}
 
 }

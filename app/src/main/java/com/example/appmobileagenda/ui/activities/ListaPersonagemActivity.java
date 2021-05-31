@@ -2,7 +2,6 @@ package com.example.appmobileagenda.ui.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -18,72 +17,70 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
 
+import static com.example.appmobileagenda.ui.activities.ConstantesActivities.CHAVE_PERSONAGEM;
+
 public class ListaPersonagemActivity extends AppCompatActivity {
 
+    public static final String TITULO_APPBAR = "Lista de Personagens";
     private final PersonagemDAO dao = new PersonagemDAO();
+    private FloatingActionButton fab_add;
+    private ListView listaDePersonagens;
 
     @Override
     protected void onCreate(@NonNull Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lista_personagem);
-        setTitle("Lista de Personagens");
-
-        adicionaPersonagensTeste();
-
-        configuraFabAdd();
-
-    }
-
-    private void adicionaPersonagensTeste() {
-        dao.salva(new Personagem("Ryu", "1.70", "02041979"));
-        dao.salva(new Personagem("Ken", "1.80", "02041979"));
+        setTitle(TITULO_APPBAR);
+        inicializaListaFab();
+        configuraFabNovoPersonagem();
     }
 
     @Override
-    protected void onResume() {
-        super.onResume();
+    protected void onResume() { super.onResume(); configuraLista(); }
 
-        configuraLista();
-    }
-
-    private void configuraFabAdd() {
-//        referencia o fab na activity lista de personagem
-        FloatingActionButton fab_add = findViewById(R.id.fab_addPerson);
+    private void configuraFabNovoPersonagem() {
 //        configura a ação do botão para abrir o formulário
         fab_add.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-            startActivity(new Intent(ListaPersonagemActivity.this, FormularioPersonagemActivity.class));
-            }
+            public void onClick(View view) { abreFormulario(); }
         });
+    }
+
+    private void abreFormulario() {
+        startActivity(new Intent(ListaPersonagemActivity.this, FormularioPersonagemActivity.class));
     }
 
     private void configuraLista() {
-        //        referencia este listview com o activity_main_lista_personagem
-        ListView listaDePersonagens = findViewById(R.id.activity_main_lista_personagem);
-        List<Personagem> personagens = dao.todos();
-
+        final List<Personagem> personagens = dao.todos();
 //        relaciona um array adapter com a lista personagem
         listaDePersonagens.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, personagens));
-
-        configuraItensEdit(listaDePersonagens, personagens);
+        configuraItensEdit(listaDePersonagens);
     }
 
-    private void configuraItensEdit(ListView listaDePersonagens, List<Personagem> personagens) {
-        //        torna os itens da lista clicáveis para ser editados
+//        torna os itens da lista clicáveis para ser editados
+    private void configuraItensEdit(ListView listaDePersonagens) {
         listaDePersonagens.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//          seleciona o personagem pegando pela posição na lista
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                seleciona o personagem pegando pela posição na lista
-                Personagem personagemEscolhido = personagens.get(position);
-                Log.i("personagem", "" + personagemEscolhido);
-
-//                cria o intent e abre o formulário
-                Intent abreFormulario = new Intent(ListaPersonagemActivity.this, FormularioPersonagemActivity.class);
-                abreFormulario.putExtra("personagem", personagemEscolhido);
-                startActivity(abreFormulario);
-
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+                formularioEditar((Personagem) adapterView.getItemAtPosition(position));
             }
         });
     }
+
+//      cria o intent e abre o formulário
+    private void formularioEditar(Personagem personagemEscolhido) {
+        Intent abreFormulario = new Intent(
+                ListaPersonagemActivity.this, FormularioPersonagemActivity.class);
+        abreFormulario.putExtra(CHAVE_PERSONAGEM, personagemEscolhido);
+        startActivity(abreFormulario);
+    }
+
+//    inicializa lista e fab
+    public void inicializaListaFab(){
+        fab_add = findViewById(R.id.fab_addPerson);
+        listaDePersonagens = findViewById(R.id.activity_main_lista_personagem);
+    }
+
+
 }

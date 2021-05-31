@@ -15,25 +15,26 @@ public class PersonagemDAO {
         personagemSalvo.setId(contadorId);
         personagens.add(personagemSalvo);
 //        aumenta o contador de Id
+        autalizaId();
+    }
+
+    private void autalizaId() {
         contadorId++;
     }
 
     public void editar (Personagem personagem){
-//        já limpa antes de usar
-        Personagem personagemEscolhido = null;
-
-//        verifica um por um comparando por Id
-        for (Personagem p: personagens){
-           if(p.getId() == personagem.getId()){
-               personagemEscolhido = p;
-           }
-        }
-
+        Personagem personagemEscolhido = buscaPersonagemId(personagem);
 //        define a posição antiga do personagem da lista
         if (personagemEscolhido != null){
             int posicaoPersonagem = personagens.indexOf(personagemEscolhido);
             personagens.set(posicaoPersonagem, personagem);
         }
+    }
+//        verifica um por um comparando por Id
+    private Personagem buscaPersonagemId(Personagem personagem) {
+        for (Personagem p: personagens){
+           if(p.getId() == personagem.getId()) { return p; }
+        } return null;
     }
 
 //    retorna os personagens salvos no dao
