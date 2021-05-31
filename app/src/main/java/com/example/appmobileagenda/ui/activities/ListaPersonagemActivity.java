@@ -23,11 +23,16 @@ import java.util.List;
 
 public class ListaPersonagemActivity extends AppCompatActivity {
 
+    private final PersonagemDAO dao = new PersonagemDAO();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lista_personagem);
         setTitle("Lista de Personagens");
+
+        dao.salva(new Personagem("Ryu", "1,70", "02/04/1979"));
+        dao.salva(new Personagem("Ken", "1,80", "02/04/1979"));
 
 //        referencia o fab na activity lista de personagem
         FloatingActionButton fab_add = findViewById(R.id.fab_addPerson);
@@ -38,42 +43,32 @@ public class ListaPersonagemActivity extends AppCompatActivity {
             startActivity(new Intent(ListaPersonagemActivity.this, FormularioPersonagemActivity.class));
             }
         });
-
-//        lista de personagens
-        /*List<String> personagem = new ArrayList<>(Arrays.asList("Alex", "Ken", "Ryu", "Guile"));
-
-        TextView primeiroPersonagem = findViewById(R.id.textView1);
-        TextView segundoPersonagem = findViewById(R.id.textView2);
-        TextView terceiroPersonagem = findViewById(R.id.textView3);
-
-        primeiroPersonagem.setText(personagem.get(0));
-        segundoPersonagem.setText(personagem.get(1));
-        terceiroPersonagem.setText(personagem.get(2));*/
     }
 
     @Override
     protected void onResume() {
         super.onResume();
 
-        PersonagemDAO personagemDAO = new PersonagemDAO();
 //        referencia este listview com o activity_main_lista_personagem
         ListView listaDePersonagens = findViewById(R.id.activity_main_lista_personagem);
+        List<Personagem> personagens = dao.todos();
 
 //        relaciona um array adapter com a lista personagem
-        List<Personagem> personagens = personagemDAO.todos();
         listaDePersonagens.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, personagens));
 
 //        torna os itens da lista clicáveis
         listaDePersonagens.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
 //                seleciona o personagem pegando pela posição na lista
                 Personagem personagemEscolhido = personagens.get(position);
-                Log.i("Personagem", "" + personagemEscolhido);
+                Log.i("personagem", "" + personagemEscolhido);
 
 //                cria o intent e abre o formulário
                 Intent abreFormulario = new Intent(ListaPersonagemActivity.this, FormularioPersonagemActivity.class);
+                abreFormulario.putExtra("personagem", personagemEscolhido);
                 startActivity(abreFormulario);
+
             }
         });
     }

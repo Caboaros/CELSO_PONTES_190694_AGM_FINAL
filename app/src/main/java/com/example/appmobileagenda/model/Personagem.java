@@ -2,13 +2,17 @@ package com.example.appmobileagenda.model;
 
 import androidx.annotation.NonNull;
 
-public class Personagem {
+import java.io.Serializable;
 
-    private final String nome;
-    private final String altura;
-    private final String nascimento;
+//permite passar informações enquanto chama um intent
+public class Personagem implements Serializable {
 
-    //método construtor de Personagem
+    private String nome;
+    private String altura;
+    private String nascimento;
+    private int id = 0;
+
+//    método construtor de Personagem
     public Personagem(String nome, String alt, String nasc) {
 
         this.nome = nome;
@@ -16,14 +20,27 @@ public class Personagem {
         this.nascimento = nasc;
     }
 
-//  para exibição correta na lista
-    @NonNull
-    @Override
-    public String toString() {
-        return nome;
+//    setters
+    public void setId(int id){
+        this.id = id;
+    }
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
-    //getters
+    public void setAltura(String altura) {
+        this.altura = altura;
+    }
+
+    public void setNascimento(String nascimento) {
+        this.nascimento = nascimento;
+    }
+
+//    getters
+    public int getId(){
+        return id;
+    }
+
     public String getNome() {
         return nome;
     }
@@ -35,4 +52,14 @@ public class Personagem {
     public String getNascimento() {
         return nascimento;
     }
+
+    //  para exibição correta na lista
+    @NonNull
+    @Override
+    public String toString() {
+        return nome;
+    }
+
+
+
 }
