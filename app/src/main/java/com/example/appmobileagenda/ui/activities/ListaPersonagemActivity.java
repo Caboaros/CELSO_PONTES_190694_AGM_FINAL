@@ -77,6 +77,7 @@ public class ListaPersonagemActivity extends AppCompatActivity {
         final List<Personagem> personagens = dao.todos();
         listaDePersonagens(listaDePersonagens, personagens);
         configuraItensEdit(listaDePersonagens);
+        registerForContextMenu(listaDePersonagens);
     }
 
     private void listaDePersonagens(ListView listaDePersonagens, List<Personagem> personagens) {
