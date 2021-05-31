@@ -28,9 +28,25 @@ public class ListaPersonagemActivity extends AppCompatActivity {
         setContentView(R.layout.activity_lista_personagem);
         setTitle("Lista de Personagens");
 
-        dao.salva(new Personagem("Ryu", "1,70", "02041979"));
-        dao.salva(new Personagem("Ken", "1,80", "02041979"));
+        adicionaPersonagensTeste();
 
+        configuraFabAdd();
+
+    }
+
+    private void adicionaPersonagensTeste() {
+        dao.salva(new Personagem("Ryu", "1.70", "02041979"));
+        dao.salva(new Personagem("Ken", "1.80", "02041979"));
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        configuraLista();
+    }
+
+    private void configuraFabAdd() {
 //        referencia o fab na activity lista de personagem
         FloatingActionButton fab_add = findViewById(R.id.fab_addPerson);
 //        configura a ação do botão para abrir o formulário
@@ -42,18 +58,19 @@ public class ListaPersonagemActivity extends AppCompatActivity {
         });
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-
-//        referencia este listview com o activity_main_lista_personagem
+    private void configuraLista() {
+        //        referencia este listview com o activity_main_lista_personagem
         ListView listaDePersonagens = findViewById(R.id.activity_main_lista_personagem);
         List<Personagem> personagens = dao.todos();
 
 //        relaciona um array adapter com a lista personagem
         listaDePersonagens.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, personagens));
 
-//        torna os itens da lista clicáveis
+        configuraItensEdit(listaDePersonagens, personagens);
+    }
+
+    private void configuraItensEdit(ListView listaDePersonagens, List<Personagem> personagens) {
+        //        torna os itens da lista clicáveis para ser editados
         listaDePersonagens.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {

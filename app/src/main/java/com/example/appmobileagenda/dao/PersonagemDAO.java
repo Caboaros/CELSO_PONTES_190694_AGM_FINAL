@@ -14,17 +14,22 @@ public class PersonagemDAO {
 //        adiciona o novo personagem no dao
         personagemSalvo.setId(contadorId);
         personagens.add(personagemSalvo);
+//        aumenta o contador de Id
         contadorId++;
     }
 
     public void editar (Personagem personagem){
+//        já limpa antes de usar
         Personagem personagemEscolhido = null;
 
+//        verifica um por um comparando por Id
         for (Personagem p: personagens){
            if(p.getId() == personagem.getId()){
                personagemEscolhido = p;
            }
         }
+
+//        define a posição antiga do personagem da lista
         if (personagemEscolhido != null){
             int posicaoPersonagem = personagens.indexOf(personagemEscolhido);
             personagens.set(posicaoPersonagem, personagem);
