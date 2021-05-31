@@ -16,6 +16,7 @@ allprojects {
     repositories {
         google()
         jcenter()
+        mavenCentral() //usado para formatar o input de texto
     }
 }
 

@@ -36,6 +36,11 @@ public class PersonagemDAO {
         } return null;
     }
 
+//  remove personagem da dao
+    public void remove(Personagem personagem){
+        personagens.remove(personagem);
+    }
+
 //    retorna os personagens salvos no dao
     public List<Personagem> todos(){ return new ArrayList<>(personagens); }
 }

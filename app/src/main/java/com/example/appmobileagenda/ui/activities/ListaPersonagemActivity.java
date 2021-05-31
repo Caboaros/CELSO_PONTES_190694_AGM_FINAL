@@ -31,6 +31,7 @@ public class ListaPersonagemActivity extends AppCompatActivity {
     private ListView listaDePersonagens;
     private ArrayAdapter<Personagem> adapter; //carinha maroto pra guardar info do adapter
 
+    //No início era o caos... então Deus criou a primeira view, e Ele viu que era bom.
     @Override
     protected void onCreate(@NonNull Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,6 +42,7 @@ public class ListaPersonagemActivity extends AppCompatActivity {
         configuraLista();
     }
 
+    //quando volta, atualiza a lista
     @Override
     protected void onResume() {
         super.onResume();
@@ -61,6 +63,7 @@ public class ListaPersonagemActivity extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.activity_lista_personagens_menu, menu);
     }
 
+//    pega contexto de item selecionado
     @Override
     public boolean onContextItemSelected(@NonNull MenuItem item) {
         configuraMenu(item);
@@ -69,23 +72,30 @@ public class ListaPersonagemActivity extends AppCompatActivity {
 
 //    chama menu para remover personagem
     private void configuraMenu(@NonNull MenuItem item) {
-        int itemId = item.getItemId();
+        int itemId = item.getItemId(); //confirma se é o botão de "Remover" pelo id
         if(itemId == R.id.activity_lista_personagem_menu_remover) {
-            new AlertDialog.Builder(this)
+            new AlertDialog.Builder(this) //chama alert dialog para confirmar remoção
                     .setTitle("Removendo Personagem")
                     .setMessage("Tem certeza que deseja remover?")
                     .setPositiveButton("Sim", new DialogInterface.OnClickListener() {
+                        //torna positive bt clicável e executa a ação de remover
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            AdapterView.AdapterContextMenuInfo menuInfo = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
-                            Personagem personagemEscolhido = adapter.getItem(menuInfo.position);
-                            adapter.remove(personagemEscolhido);
+                            AdapterView.AdapterContextMenuInfo menuInfo = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo(); //pega info contida na posição da lista
+                            Personagem personagemEscolhido = adapter.getItem(menuInfo.position); //pega o item pela posição na lista
+                            remove(personagemEscolhido); //remove do dao e do adapter
                         }
                     })
-                    .setNegativeButton("Não", null)
-                    .show();
+                    .setNegativeButton("Não", null) //faz nada
+                    .show(); //exibe alert
         }
     }
+
+    private void remove(Personagem personagem){
+        dao.remove(personagem);
+        adapter.remove(personagem);
+    }
+
 
 //    configura a ação do botão para abrir o formulário
     private void configuraFabNovoPersonagem() {
