@@ -2,10 +2,13 @@ package com.example.appmobileagenda.ui.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.appmobileagenda.R;
@@ -25,6 +28,21 @@ public class FormularioPersonagemActivity extends AppCompatActivity {
     private Personagem personagem;
     private final PersonagemDAO dao = new PersonagemDAO();
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.activity_formulario_personagem_menu_salvar, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        int itemId = item.getItemId(); //confirma se é o botão de "Remover" pelo id
+        if(itemId == R.id.activity_formulario_personagem_menu_salvar) {
+            finalizaFormulario();
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
     //cria a view, inicializa campos, botão e carrega infos do personagem se for edição
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +50,7 @@ public class FormularioPersonagemActivity extends AppCompatActivity {
         setContentView(R.layout.activity_formulario_personagem);
         setTitle(TITULO_APPBAR);
         inicializaCampos();
-        configuraBotao();
+        //finalizaFormulario();
         carregaPersonagem();
     }
 
@@ -58,18 +76,12 @@ public class FormularioPersonagemActivity extends AppCompatActivity {
     }
 
 //    adiciona o onclicklistener no botão de salvar
-    private void configuraBotao() {
-        Button bt_salvar = findViewById(R.id.bt_salvar);
-        bt_salvar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                preencherPersonagem();
-                editSavePersonagem();
-            }
-        });
+    private void finalizaFormulario() {
+        preencherPersonagem();
+        salvaPersonagem();
     }
 //    verifica se id é valido, salva ou edita personagem aberto, e finaliza activity
-    private void editSavePersonagem() {
+    private void salvaPersonagem() {
         if (personagem.IdValido()) dao.editar(personagem);
         else dao.salva(personagem);
         finish();
