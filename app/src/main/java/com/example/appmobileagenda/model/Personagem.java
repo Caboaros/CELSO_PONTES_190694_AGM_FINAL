@@ -20,6 +20,9 @@ public class Personagem implements Serializable {
         this.nascimento = nasc;
     }
 
+    public Personagem(){
+//        construtor vazio
+    }
 //    setters
     public void setId(int id){
         this.id = id;

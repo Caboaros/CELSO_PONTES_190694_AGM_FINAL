@@ -19,6 +19,7 @@ public class FormularioPersonagemActivity extends AppCompatActivity {
     private EditText edit_altura;
     private EditText edit_nasc;
     private final PersonagemDAO dao = new PersonagemDAO();
+    private Personagem Personagem;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,11 +65,20 @@ public class FormularioPersonagemActivity extends AppCompatActivity {
             }
         });
 
+//        pega o intent de quando seleciona um personagem na lista e joga os dados no formulário
         Intent dados = getIntent();
-        Personagem personagem = (Personagem) dados.getSerializableExtra("personagem");
-        edit_nome.setText(personagem.getNome());
-        edit_altura.setText(personagem.getAltura());
-        edit_nasc.setText(personagem.getNascimento());
+//        verifica se tem extras
+        if(dados.hasExtra("personagem")) {
+
+            Personagem personagem = (Personagem) dados.getSerializableExtra("personagem");
+            edit_nome.setText(personagem.getNome());
+            edit_altura.setText(personagem.getAltura());
+            edit_nasc.setText(personagem.getNascimento());
+
+        } //se não tiver, usa um personagem vazio
+        else{
+            Personagem = new Personagem();
+        }
     }
 
 
