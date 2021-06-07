@@ -1,5 +1,8 @@
 package com.example.appmobileagenda.model;
 
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+
 import androidx.annotation.NonNull;
 
 import java.io.Serializable;

@@ -7,6 +7,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioGroup;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -25,15 +26,22 @@ public class FormularioPersonagemActivity extends AppCompatActivity {
     private EditText edit_nome;
     private EditText edit_altura;
     private EditText edit_nasc;
+    private EditText edit_tel;
+    private EditText edit_end;
+    private EditText edit_cep;
+    private EditText edit_rg;
+    private EditText edit_genero;
     private Personagem personagem;
     private final PersonagemDAO dao = new PersonagemDAO();
 
+    //cria o botão de addicionar/salvar personagem no topo
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.activity_formulario_personagem_menu_salvar, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
+    //gerencia se tem algum item selecionado na lista
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int itemId = item.getItemId(); //confirma se é o botão de "Remover" pelo id
@@ -73,6 +81,11 @@ public class FormularioPersonagemActivity extends AppCompatActivity {
         edit_nome.setText(personagem.getNome());
         edit_altura.setText(personagem.getAltura());
         edit_nasc.setText(personagem.getNascimento());
+        edit_tel.setText(personagem.getTelefone());
+        edit_end.setText(personagem.getEndereco());
+        edit_cep.setText(personagem.getCep());
+        edit_rg.setText(personagem.getRg());
+        edit_genero.setText(personagem.getGenero());
     }
 
 //    adiciona o onclicklistener no botão de salvar
@@ -92,8 +105,18 @@ public class FormularioPersonagemActivity extends AppCompatActivity {
         edit_nome = findViewById(R.id.edit_nome);
         edit_altura = findViewById(R.id.edit_altura);
         edit_nasc = findViewById(R.id.edit_nasc);
+        edit_tel = findViewById(R.id.edit_tel);
+        edit_end = findViewById(R.id.edit_end);
+        edit_cep = findViewById(R.id.edit_cep);
+        edit_rg = findViewById(R.id.edit_rg);
+        edit_genero = findViewById(R.id.edit_genero);
+
+        //formata cada campo adequadamente
         formatarCampo(edit_altura, "N,NN");
         formatarCampo(edit_nasc, "NN/NN/NNNN");
+        formatarCampo(edit_tel, "(NN)NNNNN-NNNN");
+        formatarCampo(edit_cep, "NNNNN-NNN");
+        formatarCampo(edit_rg, "NN.NNN.NNN-N");
     }
 
 //  formata o campo de acordo com a string desejada e cria um listener para verificar o input
@@ -109,11 +132,22 @@ public class FormularioPersonagemActivity extends AppCompatActivity {
         String nome = edit_nome.getText().toString();
         String altura = edit_altura.getText().toString();
         String nascimento = edit_nasc.getText().toString();
+        String telefone = edit_tel.getText().toString();
+        String endereco = edit_end.getText().toString();
+        String cep = edit_cep.getText().toString();
+        String rg = edit_rg.getText().toString();
+        String genero = edit_genero.getText().toString();
+
 
 //        set campos
         personagem.setNome(nome);
         personagem.setAltura(altura);
         personagem.setNascimento(nascimento);
+        personagem.setTelefone(telefone);
+        personagem.setEndereco(endereco);
+        personagem.setCep(cep);
+        personagem.setRg(rg);
+        personagem.setGenero(genero);
         dao.editar(personagem);
     }
 }
