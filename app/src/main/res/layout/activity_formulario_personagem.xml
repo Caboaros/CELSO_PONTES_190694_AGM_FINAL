@@ -13,36 +13,124 @@
         android:orientation="vertical">
 
         <EditText
-           android:id="@+id/edit_nome"
-           android:layout_width="match_parent"
-           android:layout_height="wrap_content"
-           android:layout_margin="10dp"
-           android:ems="10"
-           android:hint="Nome ex.: João"
-           android:inputType="textShortMessage|textPersonName"
-           android:singleLine="true" />
+            android:id="@+id/edit_nome"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:ems="10"
+            android:hint="Nome ex.: João"
+            android:inputType="textShortMessage|textPersonName"
+            android:singleLine="true" />
 
         <EditText
-           android:id="@+id/edit_altura"
-           android:layout_width="match_parent"
-           android:layout_height="wrap_content"
-           android:layout_margin="10dp"
-           android:ems="10"
-           android:hint="Altura ex.: 1.70"
-           android:inputType="numberDecimal"
-           android:selectAllOnFocus="true"
-           android:singleLine="true" />
+            android:id="@+id/edit_altura"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:ems="10"
+            android:hint="Altura ex.: 1.70"
+            android:inputType="numberDecimal"
+            android:selectAllOnFocus="true"
+            android:singleLine="true" />
 
         <EditText
-           android:id="@+id/edit_nasc"
-           android:layout_width="match_parent"
-           android:layout_height="wrap_content"
-           android:layout_margin="10dp"
-           android:ems="10"
-           android:hint="Nascimento ex.: 01/01/1901"
-           android:inputType="date"
-           android:selectAllOnFocus="true"
-           android:singleLine="true" />
+            android:id="@+id/edit_nasc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:ems="10"
+            android:hint="Nascimento ex.: 01/01/1901"
+            android:inputType="date"
+            android:selectAllOnFocus="true"
+            android:singleLine="true" />
+
+        <EditText
+            android:id="@+id/edit_phone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:ems="10"
+            android:hint="Telefone ex.: (11)99999-9999"
+            android:inputType="phone"
+            android:selectAllOnFocus="true"
+            android:singleLine="true" />
+
+        <EditText
+            android:id="@+id/edit_address"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:ems="10"
+            android:hint="Endereço:"
+            android:inputType="textMultiLine|textPostalAddress"
+            android:selectAllOnFocus="true"
+            android:singleLine="false" />
+
+        <EditText
+            android:id="@+id/edit_postal_code"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:ems="10"
+            android:hint="CEP ex.: 99999-999"
+            android:inputType="numberSigned|number"
+            android:selectAllOnFocus="true"
+            android:singleLine="true" />
+
+        <EditText
+            android:id="@+id/edit_personal_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:ems="10"
+            android:hint="RG ex.: xx.xxx.xxx-x"
+            android:inputType="numberSigned|number"
+            android:selectAllOnFocus="true"
+            android:singleLine="true" />
+
+        <EditText
+            android:id="@+id/edit_gender"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:ems="10"
+            android:hint="Nascimento ex.: 01/01/1901"
+            android:inputType="text"
+            android:selectAllOnFocus="true"
+            android:singleLine="true" />
+
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp">
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Gênero:"
+                android:textSize="14sp"
+                android:textStyle="normal" />
+
+            <RadioButton
+                android:id="@+id/ra_gender_male"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Masculino" />
+
+            <RadioButton
+                android:id="@+id/ra_gender_fem"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Feminino" />
+
+            <RadioButton
+                android:id="@+id/ra_gender_other"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Outros" />
+        </RadioGroup>
 
     </LinearLayout>
 </ScrollView>
